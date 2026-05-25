@@ -1,18 +1,35 @@
 struktur
 
-loadbalancer-demo/
+lbtest/
+├── app/
+│   ├── server.js
+│   ├── package.json
+│   └── Dockerfile
 │
 ├── docker-compose.yml
 │
 ├── nginx/
 │   └── nginx.conf
 │
-├── app/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
+├── k8s/
+│   ├── deployment.yml
+│   ├── service.yml
+│   ├── ingress.yml
+│   └── namespace.yml
 │
-└── k8s/
-    ├── deployment.yaml
-    ├── service.yaml
-    └── ingress.yaml
+├── ansible/
+│   ├── inventory.ini
+│   ├── playbook.yml
+│   └── roles/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+└── README.md
+
+==================
+
+cara jalankan ke folder app lalu 
+
+docker compose up --build

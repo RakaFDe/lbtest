@@ -17,3 +17,7 @@ services:
       APP_VERSION: v2
     ports:
       - "3002:3000"
+
+networks:
+  default:
+    name: lbtest-network

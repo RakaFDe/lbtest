@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.json({
     message: `Hello from ${VERSION}`,
     hostname: os.hostname(),
-    timestamp: new Date(),
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -27,6 +27,8 @@ app.get("/ready", (req, res) => {
 });
 
 app.get("/metrics", (req, res) => {
+  res.set("Content-Type", "text/plain");
+
   res.send(`
 app_version{version="${VERSION}"} 1
 `);
@@ -38,6 +40,25 @@ app.get("/hostname", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.get("/info", (req, res) => {
+  res.json({
+    version: VERSION,
+    hostname: os.hostname(),
+    platform: os.platform(),
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
+const server = app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
+});
+
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received");
+
+  server.close(() => {
+    console.log("Server closed");
+    process.exit(0);
+  });
 });
