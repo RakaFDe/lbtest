@@ -6,11 +6,17 @@ const app = express();
 const VERSION = process.env.APP_VERSION || "v1";
 const PORT = process.env.PORT || 3000;
 
+let requestCount=0;
+
+
 app.get("/", (req, res) => {
+  requestCount++;
+
   res.json({
     message: `Hello from ${VERSION}`,
     hostname: os.hostname(),
     timestamp: new Date().toISOString(),
+    requestCount
   });
 });
 
