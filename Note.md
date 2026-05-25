@@ -33,3 +33,4 @@ lbtest/
 cara jalankan ke folder app lalu 
 
 docker compose up --build
+atau tambahkan -d untuk background
